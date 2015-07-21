@@ -74,7 +74,3 @@ class CmdrCamera extends Tab {
     });
   }
 }
-
-void main(List args, SendPort interfacesSendPort) {
-  Tab.main(interfacesSendPort, args, (id, path, port, args) => new CmdrCamera(id, path, port));
-}
