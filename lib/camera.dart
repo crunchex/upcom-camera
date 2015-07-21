@@ -8,8 +8,7 @@ import 'dart:isolate';
 
 import 'package:upcom-api/tab.dart';
 import 'package:upcom-api/updroid_message.dart';
-
-import '../../server_helper.dart' as help;
+import 'package:upcom-api/server_helper.dart' as help;
 
 part 'src/camera_server.dart';
 
@@ -19,14 +18,14 @@ class CmdrCamera extends Tab {
 
   CmdrCamera(int id, Directory dir, SendPort sp) :
   super(id, 'UpDroidCamera', sp) {
-
+    mailbox.send(new Msg('TAB_READY'));
   }
 
   void registerMailbox() {
     mailbox.registerMessageHandler('SIGNAL_READY', _signalReady);
 
     _getDeviceIds().forEach((int key) {
-      mailbox.registerEndpointHandler('/${guiName.toLowerCase()}/$id/input/$key', _handleInputStream);
+      mailbox.registerEndPointHandler('/$guiName/$id/input/$key', _handleInputStream);
     });
   }
 
@@ -40,8 +39,8 @@ class CmdrCamera extends Tab {
     mailbox.send(new Msg('CAMERA_READY', JSON.encode(_getDeviceIds())));
   }
 
-  void _handleInputStream(HttpRequest request) {
-    _currentDeviceId = int.parse(request.uri.pathSegments.last);
+  void _handleInputStream(String endpoint, String s) {
+    _currentDeviceId = int.parse(endpoint.split('/').last);
     if (CameraServer.servers[_currentDeviceId] == null) {
       CameraServer.servers[_currentDeviceId] = new CameraServer(_currentDeviceId);
     }
@@ -49,9 +48,9 @@ class CmdrCamera extends Tab {
     if (_currentDeviceSub != null) {
       CameraServer.servers[_currentDeviceId].unsubscribeToString(_currentDeviceSub);
     }
-    mailbox.ws.add(CameraServer.streamHeader);
+    mailbox.send(new Msg(endpoint, JSON.encode(CameraServer.streamHeader)));
     _currentDeviceSub = CameraServer.servers[_currentDeviceId].subscribeToStream().listen((data) {
-      mailbox.ws.add(data);
+      mailbox.send(new Msg(endpoint, JSON.encode(data)));
     });
   }
 
@@ -77,5 +76,5 @@ class CmdrCamera extends Tab {
 }
 
 void main(List args, SendPort interfacesSendPort) {
-  return Tab.main(interfacesSendPort, (id, path, port) => new CmdrCamera(id, path, port));
+  Tab.main(interfacesSendPort, args, (id, path, port, args) => new CmdrCamera(id, path, port));
 }
