@@ -119,7 +119,7 @@ class UpDroidCamera extends TabController {
   }
 
   void registerMailbox() {
-    mailbox.registerWebSocketEvent(EventType.ON_MESSAGE, 'TAB_READY', _signalReady);
+    mailbox.registerWebSocketEvent(EventType.ON_OPEN, 'TAB_READY', _signalReady);
     mailbox.registerWebSocketEvent(EventType.ON_MESSAGE, 'NO_FFMPEG', _throwAlert);
     mailbox.registerWebSocketEvent(EventType.ON_MESSAGE, 'CAMERA_READY', _postReadySetup);
   }

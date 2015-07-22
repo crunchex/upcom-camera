@@ -18,7 +18,7 @@ class CmdrCamera extends Tab {
 
   CmdrCamera(int id, Directory dir, SendPort sp) :
   super(id, 'UpDroidCamera', sp) {
-    mailbox.send(new Msg('TAB_READY'));
+
   }
 
   void registerMailbox() {
