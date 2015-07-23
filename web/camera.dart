@@ -5,8 +5,7 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:js' as js;
 
-import 'package:upcom-api/web/mailbox/mailbox.dart';
-import 'package:upcom-api/web/tab/tab_controller.dart';
+import 'package:upcom-api/tab_frontend.dart';
 
 enum AspectType { FIXED, FULL }
 

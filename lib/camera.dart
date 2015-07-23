@@ -6,9 +6,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:isolate';
 
-import 'package:upcom-api/tab.dart';
-import 'package:upcom-api/updroid_message.dart';
-import 'package:upcom-api/server_helper.dart' as help;
+import 'package:upcom-api/tab_backend.dart';
+import 'package:upcom-api/debug.dart' as help;
 
 part 'src/camera_server.dart';
 
