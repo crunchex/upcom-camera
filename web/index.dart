@@ -8,6 +8,6 @@ void main() {
   document.body.children.add(jsmpgJs);
 
   jsmpgJs.onLoad.first.then((_) {
-    new UpDroidCamera();
+    new UpDroidCamera(jsmpgJs);
   });
 }

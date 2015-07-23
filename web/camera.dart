@@ -31,12 +31,13 @@ class UpDroidCamera extends TabController {
   AnchorElement _fullStretchedButton;
 
   CanvasElement _canvas;
+  ScriptElement _jsmpgJs;
   int _width = 320;
   int _height = 240;
   AspectType _aspect;
 
-  UpDroidCamera() : super(className, 'Camera', getMenuConfig(), 'http://localhost:12060/tabs/upcom-camera/camera.css') {
-
+  UpDroidCamera(ScriptElement script) : super(className, 'Camera', getMenuConfig(), 'http://localhost:12060/tabs/upcom-camera/camera.css') {
+    _jsmpgJs = script;
   }
 
   void setUpController() {
@@ -149,5 +150,7 @@ class UpDroidCamera extends TabController {
     return c.future;
   }
 
-  void cleanUp() {}
+  void cleanUp() {
+    _jsmpgJs.remove();
+  }
 }
