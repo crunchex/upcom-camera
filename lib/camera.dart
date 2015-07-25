@@ -16,7 +16,7 @@ class CmdrCamera extends Tab {
   int _currentDeviceId;
 
   CmdrCamera(int id, Directory dir, SendPort sp) :
-  super(id, 'UpDroidCamera', sp) {
+  super(id, 'upcom-camera', 'UpDroid Camera', 'Camera', sp) {
 
   }
 
@@ -24,7 +24,7 @@ class CmdrCamera extends Tab {
     mailbox.registerMessageHandler('SIGNAL_READY', _signalReady);
 
     _getDeviceIds().forEach((int key) {
-      mailbox.registerEndPointHandler('/$guiName/$id/input/$key', _handleInputStream);
+      mailbox.registerEndPointHandler('/$refName/$id/input/$key', _handleInputStream);
     });
   }
 

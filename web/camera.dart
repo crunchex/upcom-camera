@@ -12,8 +12,6 @@ enum AspectType { FIXED, FULL }
 /// [UpDroidCamera] is a client-side class that uses the jsmpeg library
 /// to render a video stream from a [WebSocket] onto a [_canvasElement].
 class UpDroidCamera extends TabController {
-  static String className = 'UpDroidCamera';
-
   static List getMenuConfig() {
     List menu = [
       {'title': 'File', 'items': [
@@ -35,7 +33,7 @@ class UpDroidCamera extends TabController {
   int _height = 240;
   AspectType _aspect;
 
-  UpDroidCamera(ScriptElement script) : super(className, 'Camera', getMenuConfig(), 'http://localhost:12060/tabs/upcom-camera/camera.css') {
+  UpDroidCamera(ScriptElement script) : super('upcom-camera', 'UpDroid Camera', 'Camera', getMenuConfig(), 'http://localhost:12060/tabs/upcom-camera/camera.css') {
     _jsmpgJs = script;
   }
 
@@ -82,7 +80,7 @@ class UpDroidCamera extends TabController {
     List<int> deviceIds = JSON.decode(devices);
     deviceIds.sort((a, b) => a.compareTo(b));
     deviceIds.forEach((int i) {
-      view.addMenuItem({'type': 'toggle', 'title': 'Video$i', 'handler': _startPlayer, 'args': i}, '#${shortName.toLowerCase()}-$id-devices');
+      view.addMenuItem({'type': 'toggle', 'title': 'Video$i', 'handler': _startPlayer, 'args': i}, '#$refName-$id-devices');
     });
 
     // Returns the sorted list.
@@ -93,7 +91,7 @@ class UpDroidCamera extends TabController {
     String deviceIdString = deviceId.toString();
     String url = window.location.host;
     url = url.split(':')[0];
-    js.JsObject client = new js.JsObject(js.context['WebSocket'], ['ws://' + url + ':12060/$className/$id/input/$deviceIdString']);
+    js.JsObject client = new js.JsObject(js.context['WebSocket'], ['ws://' + url + ':12060/$refName/$id/input/$deviceIdString']);
 
     var options = new js.JsObject.jsify({'canvas': _canvas});
 
