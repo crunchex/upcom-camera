@@ -100,15 +100,15 @@ class UpDroidCamera extends TabController {
 
   //\/\/ Mailbox Handlers /\/\//
 
-  void _signalReady(UpDroidMessage um) {
+  void _signalReady(Msg um) {
     mailbox.ws.send('[[SIGNAL_READY]]');
   }
 
-  void _throwAlert(UpDroidMessage um) {
+  void _throwAlert(Msg um) {
     window.alert('Camera won\'t work without ffmpeg. Please install it!');
   }
 
-  void _postReadySetup(UpDroidMessage um) {
+  void _postReadySetup(Msg um) {
     List<int> sortedIds = _setDevices(um.body);
     if (sortedIds.isEmpty) return;
 
