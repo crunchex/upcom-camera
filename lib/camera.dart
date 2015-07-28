@@ -12,11 +12,13 @@ import 'package:upcom-api/debug.dart' as help;
 part 'src/camera_server.dart';
 
 class CmdrCamera extends Tab {
+  static final List<String> names = ['upcom-camera', 'UpDroid Camera', 'Camera'];
+
   StreamSubscription _currentDeviceSub;
   int _currentDeviceId;
 
-  CmdrCamera(int id, Directory dir, SendPort sp) :
-  super(id, 'upcom-camera', 'UpDroid Camera', 'Camera', sp) {
+  CmdrCamera(SendPort sp, args) :
+  super(CmdrCamera.names, sp, args) {
 
   }
 
