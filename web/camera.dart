@@ -33,7 +33,7 @@ class UpDroidCamera extends TabController {
   int _height = 240;
   AspectType _aspect;
 
-  UpDroidCamera(ScriptElement script) : super('upcom-camera', 'UpDroid Camera', 'Camera', getMenuConfig(), 'http://localhost:12060/tabs/upcom-camera/camera.css') {
+  UpDroidCamera(ScriptElement script) : super('upcom-camera', 'UpDroid Camera', 'Camera', getMenuConfig(), 'tabs/upcom-camera/camera.css') {
     _jsmpgJs = script;
   }
 
