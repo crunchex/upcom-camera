@@ -12,6 +12,8 @@ enum AspectType { FIXED, FULL }
 /// [UpDroidCamera] is a client-side class that uses the jsmpeg library
 /// to render a video stream from a [WebSocket] onto a [_canvasElement].
 class UpDroidCamera extends TabController {
+  static final List<String> names = ['upcom-camera', 'UpDroid Camera', 'Camera'];
+
   static List getMenuConfig() {
     List menu = [
       {'title': 'File', 'items': [
@@ -33,7 +35,8 @@ class UpDroidCamera extends TabController {
   int _height = 240;
   AspectType _aspect;
 
-  UpDroidCamera(ScriptElement script) : super('upcom-camera', 'UpDroid Camera', 'Camera', getMenuConfig(), 'tabs/upcom-camera/camera.css') {
+  UpDroidCamera(ScriptElement script) :
+  super(UpDroidCamera.names, getMenuConfig(), 'tabs/upcom-camera/camera.css') {
     _jsmpgJs = script;
   }
 
