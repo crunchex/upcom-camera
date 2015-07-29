@@ -7,7 +7,7 @@ import 'dart:typed_data';
 import 'dart:isolate';
 
 import 'package:upcom-api/tab_backend.dart';
-import 'package:upcom-api/debug.dart' as help;
+import 'package:upcom-api/debug.dart';
 
 part 'src/camera_server.dart';
 

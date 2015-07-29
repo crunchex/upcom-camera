@@ -75,7 +75,7 @@ class CameraServer {
       //shell.stderr.listen((data) => help.debug('video [$videoId] stderr: ${UTF8.decode(data)}', 0));
     }).catchError((error) {
       if (error is! ProcessException) throw error;
-      help.debug('ffmpeg [$videoId]: run failed. Probably not installed', 1);
+      debug('ffmpeg [$videoId]: run failed. Probably not installed', 1);
       return;
     });
   }
