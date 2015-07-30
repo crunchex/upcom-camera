@@ -99,6 +99,8 @@ class UpDroidCamera extends TabController {
     var options = new js.JsObject.jsify({'canvas': _canvas});
 
     new js.JsObject(js.context['jsmpeg'], [client, options]);
+
+    hoverText = 'Video $deviceId';
   }
 
   //\/\/ Mailbox Handlers /\/\//
