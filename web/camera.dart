@@ -30,14 +30,16 @@ class UpDroidCamera extends TabController {
   AnchorElement _fullStretchedButton;
 
   CanvasElement _canvas;
-  ScriptElement _jsmpgJs;
+  ScriptElement _eventEmitter2, _mjpegcanvas;
   int _width = 320;
   int _height = 240;
   AspectType _aspect;
 
-  UpDroidCamera(ScriptElement script) :
+  UpDroidCamera(List<ScriptElement> scripts) :
   super(UpDroidCamera.names, getMenuConfig(), 'tabs/upcom-camera/camera.css') {
-    _jsmpgJs = script;
+    _eventEmitter2 = scripts[0];
+    _mjpegcanvas = scripts[1];
+
   }
 
   void setUpController() {
@@ -153,6 +155,7 @@ class UpDroidCamera extends TabController {
   }
 
   void cleanUp() {
-    _jsmpgJs.remove();
+    _eventEmitter2.remove();
+    _mjpegcanvas.remove();
   }
 }
