@@ -8,6 +8,7 @@ import 'dart:isolate';
 
 import 'package:upcom-api/tab_backend.dart';
 import 'package:upcom-api/debug.dart';
+import 'package:upcom-api/ros.dart';
 
 part 'src/camera_server.dart';
 
@@ -53,6 +54,16 @@ class CmdrCamera extends Tab {
     _currentDeviceSub = CameraServer.servers[_currentDeviceId].subscribeToStream().listen((data) {
       mailbox.send(new Msg(endpoint, JSON.encode(data)));
     });
+  }
+
+  void _startUsbCam() {
+    String sourceCommand = '/opt/ros/indigo/setup.bash';
+    String runCommand = sourceCommand + ' && roslaunch ';
+    Process.start('bash', ['-c', '. $runCommand'], runInShell: true);
+  }
+
+  void _startMjpegServer() {
+
   }
 
   List<int> _getDeviceIds() {
